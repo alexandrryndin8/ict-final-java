@@ -6,8 +6,23 @@ public class Main {
 
         Scanner scanner = new Scanner(System.in);
 
-//        PaymentRepository repo = new PostgresPaymentRepository();
-        PaymentRepository repo = new MongoPaymentRepository();
+        System.out.println("=== Choose database provider ===");
+        System.out.println("1. PostgreSQL");
+        System.out.println("2. MongoDB");
+        System.out.print("Enter choice (1 or 2): ");
+
+        int dbChoice = scanner.nextInt();
+        scanner.nextLine();
+
+        PaymentRepository repo;
+
+        if (dbChoice == 1) {
+            repo = new PostgresPaymentRepository();
+            System.out.println("PostgreSQL repository selected.");
+        } else {
+            repo = new MongoPaymentRepository();
+            System.out.println("MongoDB repository selected.");
+        }
 
         while (true) {
             System.out.println("\n=== Payment Management ===");
@@ -23,7 +38,6 @@ public class Main {
             scanner.nextLine();
 
             switch (choice) {
-
                 case 1 -> {
                     System.out.print("Enter payment id: ");
                     int id = scanner.nextInt();
@@ -34,7 +48,6 @@ public class Main {
                     System.out.print("Enter amount: ");
                     double amount = scanner.nextDouble();
                     scanner.nextLine();
-
                     System.out.print("Enter provider: ");
                     String provider = scanner.nextLine();
 
